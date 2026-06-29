@@ -1,0 +1,53 @@
+@model IEnumerable<LockedInWebApp.Models.Item>
+
+@{
+    ViewData["Title"] = "My Inventory";
+}
+
+<h2>My Inventory</h2>
+<a asp-action="Create" class="btn btn-primary mb-3">+ Add Item</a>
+
+@if (!Model.Any())
+{
+    <p>No items yet. Add your first item!</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Purchase Price</th>
+                <th>Sale Price</th>
+                <th>Date Added</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>$@item.PurchasePrice</td>
+                <td>@(item.SalePrice.HasValue ? "$" + item.SalePrice : "-")</td>
+                <td>@item.DateAdded.ToString("dd MMM yyyy")</td>
+                <td>@(item.IsSold ? "Sold" : "Available")</td>
+                <td>
+                @if (!item.IsSold)
+                {
+                    <form asp-action="MarkAsSold" method="post" class="d-inline">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <input type="number" name="salePrice" placeholder="Sale price" 
+                               step="0.01" class="form-control d-inline w-auto" required />
+                        <button type="submit" class="btn btn-success btn-sm">Mark Sold</button>
+                    </form>
+                }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
