@@ -398,3 +398,11 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# SQLite database files
+*.db
+*.db-shm
+*.db-wal
+
+# Uploaded photos (user data)
+wwwroot/uploads/
