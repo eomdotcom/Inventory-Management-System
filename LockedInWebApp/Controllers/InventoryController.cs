@@ -66,5 +66,19 @@ namespace LockedInWebApp.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+        // Delete item
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var userId = _userManager.GetUserId(User);
+            var item = await _context.Items
+                .FirstOrDefaultAsync(i => i.Id == id && i.UserId == userId);
+            if (item != null)
+            {
+                _context.Items.Remove(item);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
