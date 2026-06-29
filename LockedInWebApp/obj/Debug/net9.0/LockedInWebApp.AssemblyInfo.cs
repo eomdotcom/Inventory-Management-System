@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("LockedInWebApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1b293488b2bd085bda84c360a3ebc7101b412cbc")]
 [assembly: System.Reflection.AssemblyProductAttribute("LockedInWebApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LockedInWebApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
