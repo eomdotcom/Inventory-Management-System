@@ -109,5 +109,22 @@ namespace LockedInWebApp.Controllers
             }
             return View(item);
         }
+        // Dashboard
+        public async Task<IActionResult> Dashboard()
+        {
+            var userId = _userManager.GetUserId(User);
+            var items = await _context.Items
+                .Where(i => i.UserId == userId)
+                .ToListAsync();
+
+            ViewBag.TotalItems = items.Count;
+            ViewBag.AvailableItems = items.Count(i => !i.IsSold);
+            ViewBag.SoldItems = items.Count(i => i.IsSold);
+            ViewBag.TotalSpent = items.Sum(i => i.PurchasePrice);
+            ViewBag.TotalEarned = items.Where(i => i.IsSold).Sum(i => i.SalePrice ?? 0);
+            ViewBag.TotalProfit = ViewBag.TotalEarned - ViewBag.TotalSpent;
+
+            return View();
+        }
     }
 }
