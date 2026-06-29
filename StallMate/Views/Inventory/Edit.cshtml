@@ -6,7 +6,7 @@
 
 <h2>Edit Item</h2>
 
-<form asp-action="Edit" method="post">
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
     <input type="hidden" asp-for="Id" />
     
     <div class="mb-3">
@@ -24,6 +24,23 @@
         <label asp-for="PurchasePrice" class="form-label">Purchase Price ($)</label>
         <input asp-for="PurchasePrice" class="form-control" type="number" step="0.01" />
         <span asp-validation-for="PurchasePrice" class="text-danger"></span>
+    </div>
+
+    @if (Model.PhotoPath != null)
+    {
+        <div class="mb-3">
+            <a href="@Model.PhotoPath" target="_blank">
+                <img src="@Model.PhotoPath" 
+                    class="img-fluid rounded" 
+                    style="height: 200px; width: 100%; object-fit: cover; cursor: pointer;" />
+            </a>
+            <p class="text-muted small mt-1">Current photo — click to view full size</p>
+        </div>
+    }
+    <div class="mb-3">
+        <label for="photo" class="form-label">Update Photo (optional)</label>
+        <input type="file" id="photo" name="photo" class="form-control" accept="image/*" capture="environment" />
+        <small class="text-muted">Leave empty to keep current photo</small>
     </div>
 
     <button type="submit" class="btn btn-primary">Save Changes</button>

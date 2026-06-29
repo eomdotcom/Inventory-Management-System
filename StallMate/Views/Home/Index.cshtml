@@ -1,8 +1,51 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center py-5">
+    <h1 class="display-4 fw-bold">Welcome to StallMate</h1>
+    <p class="lead text-muted">The easiest way to track your market stall inventory</p>
+    <hr class="my-4" />
+    <p>Track what you buy, what you sell, and how much you make — all in one place.</p>
+
+    @if (User.Identity != null && User.Identity.IsAuthenticated)
+    {
+        <a asp-controller="Inventory" asp-action="Index" class="btn btn-primary btn-lg me-2">View My Inventory</a>
+        <a asp-controller="Inventory" asp-action="Dashboard" class="btn btn-outline-secondary btn-lg">Dashboard</a>
+    }
+    else
+    {
+        <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary btn-lg me-2">Get Started</a>
+        <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-secondary btn-lg">Login</a>
+    }
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 text-center p-3">
+            <div class="card-body">
+                <h2>📦</h2>
+                <h5 class="card-title">Track Items</h5>
+                <p class="card-text text-muted">Add your clothing items with purchase price and description.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 text-center p-3">
+            <div class="card-body">
+                <h2>💰</h2>
+                <h5 class="card-title">Record Sales</h5>
+                <p class="card-text text-muted">Mark items as sold and track how much you earned.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 text-center p-3">
+            <div class="card-body">
+                <h2>📊</h2>
+                <h5 class="card-title">See Your Profit</h5>
+                <p class="card-text text-muted">View your dashboard to see total earnings and profit.</p>
+            </div>
+        </div>
+    </div>
 </div>

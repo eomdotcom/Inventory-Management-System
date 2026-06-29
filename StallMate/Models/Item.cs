@@ -21,5 +21,7 @@ namespace StallMate.Models
         public bool IsSold { get; set; } = false;
 
         public string UserId { get; set; } = "";
+
+        public string? PhotoPath { get; set; }
     }
 }

@@ -36,14 +36,26 @@ namespace StallMate.Controllers
             return View();
         }
 
-        // Save new item
+        // Create new item
         [HttpPost]
-        public async Task<IActionResult> Create(Item item)
+        public async Task<IActionResult> Create(Item item, IFormFile? photo)
         {
             if (ModelState.IsValid)
             {
                 item.UserId = _userManager.GetUserId(User) ?? "";
                 item.DateAdded = DateTime.Now;
+
+                if (photo != null && photo.Length > 0)
+                {
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(photo.FileName);
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", fileName);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await photo.CopyToAsync(stream);
+                    }
+                    item.PhotoPath = "/uploads/" + fileName;
+                }
+
                 _context.Items.Add(item);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -90,9 +102,9 @@ namespace StallMate.Controllers
             return View(item);
         }
 
-        // Save edited item
+        // Edit item
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, Item item)
+        public async Task<IActionResult> Edit(int id, Item item, IFormFile? photo)
         {
             var userId = _userManager.GetUserId(User);
             var existing = await _context.Items
@@ -104,6 +116,18 @@ namespace StallMate.Controllers
                 existing.Name = item.Name;
                 existing.Description = item.Description;
                 existing.PurchasePrice = item.PurchasePrice;
+
+                if (photo != null && photo.Length > 0)
+                {
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(photo.FileName);
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", fileName);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await photo.CopyToAsync(stream);
+                    }
+                    existing.PhotoPath = "/uploads/" + fileName;
+                }
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

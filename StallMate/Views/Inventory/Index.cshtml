@@ -17,6 +17,14 @@ else
     {
         <div class="card mb-3">
             <div class="card-body">
+                @if (item.PhotoPath != null)
+                {
+                    <a href="@item.PhotoPath" target="_blank">
+                        <img src="@item.PhotoPath" 
+                            class="img-fluid rounded mb-2 w-100" 
+                            style="height: 200px; object-fit: cover; cursor: pointer;" />
+                    </a>
+                }
                 <div class="d-flex justify-content-between">
                     <h5 class="card-title">@item.Name</h5>
                     <span class="badge @(item.IsSold ? "bg-success" : "bg-warning")">
