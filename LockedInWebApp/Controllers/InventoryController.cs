@@ -80,5 +80,34 @@ namespace LockedInWebApp.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+        // Show edit form
+        public async Task<IActionResult> Edit(int id)
+        {
+            var userId = _userManager.GetUserId(User);
+            var item = await _context.Items
+                .FirstOrDefaultAsync(i => i.Id == id && i.UserId == userId);
+            if (item == null) return NotFound();
+            return View(item);
+        }
+
+        // Save edited item
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, Item item)
+        {
+            var userId = _userManager.GetUserId(User);
+            var existing = await _context.Items
+                .FirstOrDefaultAsync(i => i.Id == id && i.UserId == userId);
+            if (existing == null) return NotFound();
+
+            if (ModelState.IsValid)
+            {
+                existing.Name = item.Name;
+                existing.Description = item.Description;
+                existing.PurchasePrice = item.PurchasePrice;
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(item);
+        }
     }
 }
