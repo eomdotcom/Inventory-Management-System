@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using LockedInWebApp.Models;
+using StallMate.Models;
 
-namespace LockedInWebApp.Data
+namespace StallMate.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {

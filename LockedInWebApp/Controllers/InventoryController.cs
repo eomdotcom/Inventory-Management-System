@@ -2,10 +2,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using LockedInWebApp.Data;
-using LockedInWebApp.Models;
+using StallMate.Data;
+using StallMate.Models;
 
-namespace LockedInWebApp.Controllers
+namespace StallMate.Controllers
 {
     [Authorize]
     public class InventoryController : Controller

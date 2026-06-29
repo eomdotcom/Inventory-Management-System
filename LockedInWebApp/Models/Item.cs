@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace LockedInWebApp.Models
+namespace StallMate.Models
 {
     public class Item
     {

@@ -1,4 +1,4 @@
-namespace LockedInWebApp.Models;
+namespace StallMate.Models;
 
 public class ErrorViewModel
 {

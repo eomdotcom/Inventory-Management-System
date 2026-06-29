@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using LockedInWebApp.Models;
+using StallMate.Models;
 
-namespace LockedInWebApp.Controllers;
+namespace StallMate.Controllers;
 
 public class HomeController : Controller
 {

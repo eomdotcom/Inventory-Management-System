@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace LockedInWebApp.Migrations
+namespace StallMate.Migrations
 {
     /// <inheritdoc />
     public partial class AddItemsTable : Migration
